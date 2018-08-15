@@ -8,7 +8,7 @@
 
 
     <TextView
-        android:id="@+id/lblEmail"
+        android:id="@+id/txvEmail"
         android:text="@string/lblEmail"
         android:textAlignment="center"
         android:gravity="center_vertical"
@@ -32,7 +32,7 @@
         android:layout_marginLeft="8dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/lblEmail"
+        app:layout_constraintLeft_toRightOf="@id/txvEmail"
         />
 
     <android.support.constraint.Guideline
