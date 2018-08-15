@@ -27,26 +27,33 @@ public class OptionsSelectActivity extends AppCompatActivity {
         Spinner spnType = findViewById(R.id.spnType);
 
         // get the string array resources values (the hard coded values)
+
         // Number of Questions
         ArrayAdapter<CharSequence> questionsAdapter = ArrayAdapter.createFromResource(
                 this, R.array.numberQuestionsArray, R.layout.support_simple_spinner_dropdown_item);
         spnQuestions.setAdapter(questionsAdapter);
+
         // Difficulty Setting
         ArrayAdapter<CharSequence> difficultyAdapter = ArrayAdapter.createFromResource(
                 this, R.array.difficultyArray, R.layout.support_simple_spinner_dropdown_item);
-        spnQuestions.setAdapter(difficultyAdapter);
+        spnDifficulty.setAdapter(difficultyAdapter);
+
         // Quiz Type
         ArrayAdapter<CharSequence> quizTypeAdapter = ArrayAdapter.createFromResource(
                 this, R.array.quizTypeArray, R.layout.support_simple_spinner_dropdown_item);
-        spnQuestions.setAdapter(difficultyAdapter);
+        spnType.setAdapter(quizTypeAdapter);
 
         // load all categories from the external API https://opentdb.com/api_category.php
         AsyncRestClientCalls restCall = new AsyncRestClientCalls();
 
         try {
-            restCall.getAllCategories();
+            String response = restCall.getAllCategories();
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(
+                this, R.array.quizTypeArray, R.layout.support_simple_spinner_dropdown_item);
+        spnCategory.setAdapter(categoryAdapter);
     }
 }
