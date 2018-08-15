@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">QuizProject</string>
+    <string name="lblEmail">Enter your Email</string>
+    <string name="hintEmail">abc@123.com</string>
 </resources>
