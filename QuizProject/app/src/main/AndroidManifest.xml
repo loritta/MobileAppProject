@@ -3,6 +3,7 @@
     package="com.quizproject.jab.quizproject">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,8 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".OptionsSelectActivity" android:parentActivityName=".MainActivity">
-        </activity>
+        <activity
+            android:name=".OptionsSelectActivity"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".QuizQuestionsActivity"></activity>
     </application>
 
 </manifest>
