@@ -20,8 +20,9 @@
         </activity>
         <activity
             android:name=".OptionsSelectActivity"
-            android:parentActivityName=".MainActivity"></activity>
-        <activity android:name=".QuizQuestionsActivity"></activity>
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".QuizQuestionsActivity" />
+        <activity android:name=".AllResultsActivity"></activity>
     </application>
 
 </manifest>
