@@ -6,6 +6,7 @@
     <string name="lblEmail">Enter your Email</string>
     <string name="hintEmail">abc@123.com</string>
     <string name="btnStart">Start your Quiz</string>
+    <string name="btnViewResults">View Latest Results</string>
 
     <!-- Options Activity -->
     <string name="lblNumberQuestions">Select number of questions</string>
