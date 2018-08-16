@@ -1,5 +1,6 @@
 package com.quizproject.jab.quizproject;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -69,7 +70,8 @@ public class OptionsSelectActivity extends AppCompatActivity implements OnCallCo
 
     }
 
-    // gets the quiz with the selected parameters
+    // saves the parameters and passes them to the quiz activity, which will request the
+    // appropriate quiz data for the specified parameters
     public void getQuiz(View view) {
 
         RequestParams params = new RequestParams();
@@ -115,11 +117,16 @@ public class OptionsSelectActivity extends AppCompatActivity implements OnCallCo
             }
         }
 
-        restCall.getQuizQuestions(params);
+        // pass the parameters and start a new activity
+        Intent intent = new Intent(this, QuizQuestionsActivity.class);
+
+        //intent.putExtra("userEmail", email);
+        startActivity(intent);
     }
 
     // method overrides the OnCallCompleted interface, this method gets called when the api call
     // is successful and gets the results as a parameter
+    // method is used to load spinner values from the external api
     @Override
     public void taskCompleted(JSONArray results) {
 
@@ -154,26 +161,6 @@ public class OptionsSelectActivity extends AppCompatActivity implements OnCallCo
             // handle  the exception
             return;
         }
-        // below works but does not get the ID
-//        spnCategory = findViewById(R.id.spnCategory);
-//        ArrayList<String> categoryNames = new ArrayList<>();
-//
-//
-//        try {
-//            for (int i = 0; i < results.length(); i++) {
-//                JSONObject o = results.getJSONObject(i);
-//                String category = o.getString("name");
-//                categoryNames.add(category);
-//            }
-//            spnCategory.setAdapter(
-//                    new ArrayAdapter<String>(
-//                            this,
-//                            android.R.layout.simple_spinner_dropdown_item,
-//                            categoryNames));
-//        }
-//        catch (JSONException e) {
-//            // handle  the exception
-//            return;
-//        }
+
     }
 }
