@@ -6,4 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".QuizQuestionsActivity">
 
+    <TextView
+        android:id="@+id/txvQuestionNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lblQuestionNumber"
+         />
+    <TextView
+        android:id="@+id/txvQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lblQuestion"
+        />
+
+    <RadioGroup
+        android:id="@+id/rdgAnswers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
 </android.support.constraint.ConstraintLayout>

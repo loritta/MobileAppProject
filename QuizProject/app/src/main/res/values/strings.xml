@@ -14,6 +14,10 @@
     <string name="lblType">Select a type</string>
     <string name="btnBegin">Begin</string>
 
+    <!-- Quiz Questions activity -->
+    <string name="lblQuestionNumber">Question #</string>
+    <string name="lblQuestion">Question Placeholder</string>
+
     <!-- Spinner values for number of questions -->
     <string-array name="numberQuestionsArray">
         <item>5</item>
