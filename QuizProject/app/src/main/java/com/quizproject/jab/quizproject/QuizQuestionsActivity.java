@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
 
 import com.loopj.android.http.RequestParams;
 
@@ -57,11 +59,13 @@ public class QuizQuestionsActivity extends AppCompatActivity implements OnCallCo
 
         // Parse the json data here
         Log.d("JSON", results.toString());
+
     }
 
     public void getListOfQuestions(){
         ArrayList<Question> q = new ArrayList<>();
         createTable(q);
+
     }
 
 
