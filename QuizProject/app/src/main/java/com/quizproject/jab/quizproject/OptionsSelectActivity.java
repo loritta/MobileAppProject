@@ -74,29 +74,35 @@ public class OptionsSelectActivity extends AppCompatActivity implements OnCallCo
     // appropriate quiz data for the specified parameters
     public void getQuiz(View view) {
 
-        RequestParams params = new RequestParams();
+        //RequestParams params = new RequestParams();
 
         String questions;
         String categoryID;
         String difficulty;
         String type;
 
+        // create the intent
+        Intent intent = new Intent(this, QuizQuestionsActivity.class);
         // there is always a value for number of questions
         questions = spnQuestions.getSelectedItem().toString();
-        params.put("amount", questions);
+        intent.putExtra("numberOfQuestions", questions);
+
+        //params.put("amount", questions);
 
         // category ID is needed as the parameter
         Category category = (Category) spnCategory.getSelectedItem();
         // if a category is selected
         if (category.getId() != null) {
             categoryID = category.getId();
-            params.put("category", categoryID);
+            intent.putExtra("categoryID", categoryID);
+            //params.put("category", categoryID);
         }
 
         // if a difficulty is selected
         if (!spnDifficulty.getSelectedItem().toString().equals("any")) {
             difficulty = spnDifficulty.getSelectedItem().toString();
-            params.put("difficulty", difficulty);
+            intent.putExtra("difficulty", difficulty);
+            //params.put("difficulty", difficulty);
         }
 
         // if a type is selected
@@ -107,20 +113,18 @@ public class OptionsSelectActivity extends AppCompatActivity implements OnCallCo
 
                 case "multiple choice" :
                     type = "multiple";
-                    params.put("type", type);
+                    intent.putExtra("type", type);
+                    //params.put("type", type);
                     break;
                 case "true / false" :
                     type = "boolean";
-                    params.put("type", type);
+                    intent.putExtra("type", type);
+                    //params.put("type", type);
                     break;
                 default: return;
             }
         }
-
         // pass the parameters and start a new activity
-        Intent intent = new Intent(this, QuizQuestionsActivity.class);
-
-        //intent.putExtra("userEmail", email);
         startActivity(intent);
     }
 
