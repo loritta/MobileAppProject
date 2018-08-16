@@ -12,6 +12,8 @@
     <string name="lblCategory">Select a category</string>
     <string name="lblDifficulty">Select a difficulty</string>
     <string name="lblType">Select a type</string>
+    <string name="btnBegin">Begin</string>
+
     <!-- Spinner values for number of questions -->
     <string-array name="numberQuestionsArray">
         <item>5</item>
@@ -21,16 +23,15 @@
     </string-array>
     <!-- Spinner values for difficulty -->
     <string-array name="difficultyArray">
-        <item>Select a Difficulty</item>
-        <item>Any</item>
-        <item>Easy</item>
-        <item>Medium</item>
-        <item>Hard</item>
+        <item>any</item>
+        <item>easy</item>
+        <item>medium</item>
+        <item>hard</item>
     </string-array>
     <!-- Spinner values for type -->
     <string-array name="quizTypeArray">
-        <item>Random</item>
-        <item>Multiple Choice</item>
-        <item>True / False</item>
+        <item>any</item>
+        <item>multiple choice</item>
+        <item>true / false</item>
     </string-array>
 </resources>

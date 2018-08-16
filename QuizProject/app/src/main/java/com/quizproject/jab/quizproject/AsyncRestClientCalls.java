@@ -17,7 +17,7 @@ public class AsyncRestClientCalls {
 
     private static final String TAG = "REST_CALL";
 
-    String BASE_URL = "https://opentdb.com/";
+    String BASE_URL = "https://opentdb.com/api.php?";
     JSONArray jsonResponse;
     AsyncHttpClient asyncHttpClient;
     RequestParams requestParams;
@@ -32,6 +32,7 @@ public class AsyncRestClientCalls {
         this.callCompleteListener = listener;
     }
 
+    // On success returns all available categories
     public void getAllCategories() throws JSONException {
 
         AsyncRestClient.get("api_category.php", null, new JsonHttpResponseHandler() {
@@ -42,14 +43,11 @@ public class AsyncRestClientCalls {
                 try {
                     jsonResponse = response.getJSONArray("trivia_categories");
                     callCompleteListener.taskCompleted(jsonResponse);
-                }
-                catch (JSONException e) {
+                } catch (JSONException e) {
                     // handle the exception
                     e.printStackTrace();
                     return;
                 }
-                //Log.i(TAG, "onSuccess: " + jsonResponse);
-
             }
 
             // In case of a JSONArray response
@@ -68,6 +66,29 @@ public class AsyncRestClientCalls {
                 Log.e(TAG, "onFailure: " + errorResponse);
             }
         });
-
     }
+
+//    public void getQuizQuestions(String numberQuestions, String category, String difficulty, String type) {
+    public void getQuizQuestions(RequestParams params) {
+
+        // Categories need the category ID
+        // for type see below
+        // multiple choice -> multiple
+        // true / false -> boolean
+
+        asyncHttpClient.get(BASE_URL, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                //jsonResponse = response.getJSONArray("trivia_categories");
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Log.e(TAG, "onFailure: " + errorResponse);
+            }
+        });
+    }
+
 }
