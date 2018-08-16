@@ -80,7 +80,12 @@ public class AsyncRestClientCalls {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
-                //jsonResponse = response.getJSONArray("trivia_categories");
+                try {
+                    jsonResponse = response.getJSONArray("results");
+                    callCompleteListener.taskCompleted(jsonResponse);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
