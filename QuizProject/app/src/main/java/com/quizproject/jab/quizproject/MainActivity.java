@@ -61,9 +61,11 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(SchemaContract.Users.COLUMN_NAME_EMAIL, "testEmail");
+        values.put(SchemaContract.Results.COLUMN_NAME_USER_EMAIL, "user@email.com");
+        values.put(SchemaContract.Results.COLUMN_NAME_QUIZ_DIFFICULTY, "Hard");
+        values.put(SchemaContract.Results.COLUMN_NAME_QUIZ_RESULTS, "5/10");
 
         // Insert the new row, returning the primary key value of the new row
-        long newRowId = db.insert(SchemaContract.Users.TABLE_NAME, null, values);
+        long newRowId = db.insert(SchemaContract.Results.TABLE_NAME, null, values);
     }
 }

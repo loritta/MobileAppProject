@@ -12,7 +12,7 @@
 
     <TableRow android:layout_width="0dp">
         <TextView
-            android:layout_span="2"
+            android:layout_span="3"
             android:text="@string/lblAllResultsHeader"
             android:textAlignment="center"
             />
@@ -21,11 +21,15 @@
 
     <TableRow android:layout_width="0dp">
         <TextView
-            android:text="@string/lblUserId"
+            android:text="@string/lblUserEmail"
             android:textAlignment="center"
             />
         <TextView
-            android:text="@string/lblUserEmail"
+            android:text="@string/lblQuizDifficulty"
+            android:textAlignment="center"
+            />
+        <TextView
+            android:text="@string/lblQuizResults"
             android:textAlignment="center"
             />
     </TableRow>

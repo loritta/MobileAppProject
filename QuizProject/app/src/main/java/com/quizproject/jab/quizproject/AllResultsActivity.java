@@ -29,12 +29,13 @@ public class AllResultsActivity extends AppCompatActivity {
         // define the columns to fetch
         // ID and email for now, eventually replace with actual results
         String[] projection = {
-                SchemaContract.Users._ID,
-                SchemaContract.Users.COLUMN_NAME_EMAIL
+                SchemaContract.Results.COLUMN_NAME_USER_EMAIL,
+                SchemaContract.Results.COLUMN_NAME_QUIZ_DIFFICULTY,
+                SchemaContract.Results.COLUMN_NAME_QUIZ_RESULTS
         };
 
         Cursor cursor = db.query(
-                SchemaContract.Users.TABLE_NAME,   // The table to query
+                SchemaContract.Results.TABLE_NAME,   // The table to query
                 projection,                         // The array of columns to return (pass null to get all)
                 null,              // The columns for the WHERE clause
                 null,          // The values for the WHERE clause
@@ -48,8 +49,10 @@ public class AllResultsActivity extends AppCompatActivity {
         while(cursor.moveToNext()) {
             Result result = new Result();
 
-            result.setId(cursor.getString(cursor.getColumnIndexOrThrow(SchemaContract.Users._ID)));
-            result.setEmail(cursor.getString(cursor.getColumnIndexOrThrow(SchemaContract.Users.COLUMN_NAME_EMAIL)));
+            //result.setId(cursor.getString(cursor.getColumnIndexOrThrow(SchemaContract.Users._ID)));
+            result.setEmail(cursor.getString(cursor.getColumnIndexOrThrow(SchemaContract.Results.COLUMN_NAME_USER_EMAIL)));
+            result.setDifficulty(cursor.getString(cursor.getColumnIndexOrThrow(SchemaContract.Results.COLUMN_NAME_QUIZ_DIFFICULTY)));
+            result.setResults(cursor.getString(cursor.getColumnIndexOrThrow(SchemaContract.Results.COLUMN_NAME_QUIZ_RESULTS)));
             results.add(result);
         }
         cursor.close();
@@ -66,23 +69,31 @@ public class AllResultsActivity extends AppCompatActivity {
                     TableRow.LayoutParams.WRAP_CONTENT));
 
             // create the content of the table
-            TextView txvId = new TextView(this);
-            txvId.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
+            TextView txvUserEmail = new TextView(this);
+            txvUserEmail.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                     TableRow.LayoutParams.WRAP_CONTENT));
 
-            TextView txvEmail = new TextView(this);
-            txvEmail.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
+            TextView txvQuizDifficulty = new TextView(this);
+            txvQuizDifficulty.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
+                    TableRow.LayoutParams.WRAP_CONTENT));
+
+            TextView txvQuizResults = new TextView(this);
+            txvQuizResults.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                     TableRow.LayoutParams.WRAP_CONTENT));
 
             // set the content values and center the views
-            txvId.setText(r.getId());
-            txvEmail.setText(r.getEmail());
-            txvId.setGravity(Gravity.CENTER_HORIZONTAL);
-            txvEmail.setGravity(Gravity.CENTER_HORIZONTAL);
+            txvUserEmail.setText(r.getEmail());
+            txvQuizDifficulty.setText(r.getDifficulty());
+            txvQuizResults.setText(r.getResults());
+
+            txvUserEmail.setGravity(Gravity.CENTER_HORIZONTAL);
+            txvQuizDifficulty.setGravity(Gravity.CENTER_HORIZONTAL);
+            txvQuizResults.setGravity(Gravity.CENTER_HORIZONTAL);
 
             // add the content to the row
-            tr.addView(txvId);
-            tr.addView(txvEmail);
+            tr.addView(txvUserEmail);
+            tr.addView(txvQuizDifficulty);
+            tr.addView(txvQuizResults);
             // add the row to the layout
             table.addView(
                     tr,
