@@ -101,8 +101,8 @@ public class QuizQuestionsActivity extends AppCompatActivity implements OnCallCo
 
     //creates a dynamic table based on the quantity of questions requested by the user
     public void createTable(ArrayList<Question> q){
-        LinearLayout parentLayout = (LinearLayout) findViewById(R.id.questions_list);
-        LayoutInflater inflater = getLayoutInflater();
+        LinearLayout parentLayout = (LinearLayout) findViewById(R.id.question_list);
+        
 
         for(int i = 0; i < q.size() ; i++) {
             TextView question = new TextView(this);
