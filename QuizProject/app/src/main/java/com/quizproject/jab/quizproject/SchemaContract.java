@@ -18,7 +18,7 @@ public final class SchemaContract {
         public static final String TABLE_NAME = "results";
         //public static final String COLUMN_NAME_ID = _ID;
         public static final String COLUMN_NAME_USER_EMAIL = "user_email";
-        public static final String COLUMN_NAME_QUIZ_DIFFICULTY = "quiz_difficulty";
+        public static final String COLUMN_NAME_QUIZ_QUESTIONS = "quiz_questions";
         // final score on the quiz
         public static final String COLUMN_NAME_QUIZ_RESULTS = "quiz_results";
 

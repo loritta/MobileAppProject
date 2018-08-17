@@ -4,7 +4,7 @@ package com.quizproject.jab.quizproject;
 public class Result {
     private String id;
     private String email;
-    private String difficulty;
+    private String numberOfQuestions;
     private String results;
 
     public String getId() {
@@ -23,12 +23,12 @@ public class Result {
         this.email = email;
     }
 
-    public String getDifficulty() {
-        return difficulty;
+    public String getNumberOfQuestions() {
+        return numberOfQuestions;
     }
 
-    public void setDifficulty(String difficulty) {
-        this.difficulty = difficulty;
+    public void setNumberOfQuestions(String difficulty) {
+        this.numberOfQuestions = difficulty;
     }
 
     public String getResults() {

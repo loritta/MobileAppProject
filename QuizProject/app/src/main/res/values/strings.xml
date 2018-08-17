@@ -24,7 +24,7 @@
     <!-- View All Results activity -->
     <string name="lblAllResultsHeader"><b>Latest Recorded Results</b></string>
     <string name="lblUserEmail"><b>Email</b></string>
-    <string name="lblQuizDifficulty"><b>Quiz Difficulty</b></string>
+    <string name="lblQuizQuestions"><b>Number of Questions</b></string>
     <string name="lblQuizResults"><b>Quiz Results</b></string>
 
     <!-- Spinner values for number of questions -->

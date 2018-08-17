@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DbHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 6;
+    public static final int DATABASE_VERSION = 7;
     public static final String DATABASE_NAME = "QuizDb";
 
     // saving the initial create query in a variable
@@ -21,7 +21,7 @@ public class DbHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + SchemaContract.Results.TABLE_NAME + " (" +
                     SchemaContract.Results._ID + " INTEGER PRIMARY KEY," +
                     SchemaContract.Results.COLUMN_NAME_USER_EMAIL + " TEXT," +
-                    SchemaContract.Results.COLUMN_NAME_QUIZ_DIFFICULTY + " TEXT," +
+                    SchemaContract.Results.COLUMN_NAME_QUIZ_QUESTIONS + " TEXT," +
                     SchemaContract.Results.COLUMN_NAME_QUIZ_RESULTS + " TEXT)";
 
     // same for the delete query

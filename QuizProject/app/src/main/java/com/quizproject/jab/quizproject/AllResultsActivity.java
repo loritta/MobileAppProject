@@ -30,7 +30,7 @@ public class AllResultsActivity extends SharedMenu {
         // ID and email for now, eventually replace with actual results
         String[] projection = {
                 SchemaContract.Results.COLUMN_NAME_USER_EMAIL,
-                SchemaContract.Results.COLUMN_NAME_QUIZ_DIFFICULTY,
+                SchemaContract.Results.COLUMN_NAME_QUIZ_QUESTIONS,
                 SchemaContract.Results.COLUMN_NAME_QUIZ_RESULTS
         };
 
@@ -51,7 +51,7 @@ public class AllResultsActivity extends SharedMenu {
 
             //result.setId(cursor.getString(cursor.getColumnIndexOrThrow(SchemaContract.Users._ID)));
             result.setEmail(cursor.getString(cursor.getColumnIndexOrThrow(SchemaContract.Results.COLUMN_NAME_USER_EMAIL)));
-            result.setDifficulty(cursor.getString(cursor.getColumnIndexOrThrow(SchemaContract.Results.COLUMN_NAME_QUIZ_DIFFICULTY)));
+            result.setNumberOfQuestions(cursor.getString(cursor.getColumnIndexOrThrow(SchemaContract.Results.COLUMN_NAME_QUIZ_QUESTIONS)));
             result.setResults(cursor.getString(cursor.getColumnIndexOrThrow(SchemaContract.Results.COLUMN_NAME_QUIZ_RESULTS)));
             results.add(result);
         }
@@ -73,8 +73,8 @@ public class AllResultsActivity extends SharedMenu {
             txvUserEmail.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                     TableRow.LayoutParams.WRAP_CONTENT));
 
-            TextView txvQuizDifficulty = new TextView(this);
-            txvQuizDifficulty.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
+            TextView txvNumberOfQuestions = new TextView(this);
+            txvNumberOfQuestions.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                     TableRow.LayoutParams.WRAP_CONTENT));
 
             TextView txvQuizResults = new TextView(this);
@@ -83,16 +83,16 @@ public class AllResultsActivity extends SharedMenu {
 
             // set the content values and center the views
             txvUserEmail.setText(r.getEmail());
-            txvQuizDifficulty.setText(r.getDifficulty());
+            txvNumberOfQuestions.setText(r.getNumberOfQuestions());
             txvQuizResults.setText(r.getResults());
 
             txvUserEmail.setGravity(Gravity.CENTER_HORIZONTAL);
-            txvQuizDifficulty.setGravity(Gravity.CENTER_HORIZONTAL);
+            txvNumberOfQuestions.setGravity(Gravity.CENTER_HORIZONTAL);
             txvQuizResults.setGravity(Gravity.CENTER_HORIZONTAL);
 
             // add the content to the row
             tr.addView(txvUserEmail);
-            tr.addView(txvQuizDifficulty);
+            tr.addView(txvNumberOfQuestions);
             tr.addView(txvQuizResults);
             // add the row to the layout
             table.addView(

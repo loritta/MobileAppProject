@@ -9,6 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.facebook.stetho.Stetho;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
+
+import okhttp3.OkHttpClient;
+
 //import com.facebook.stetho.Stetho;
 //import com.facebook.stetho.okhttp3.StethoInterceptor;
 
@@ -22,11 +27,11 @@ public class MainActivity extends SharedMenu {
         setContentView(R.layout.activity_main);
 
         // testing below
-//        Stetho.initializeWithDefaults(this);
-//        new OkHttpClient.Builder()
-//                .addNetworkInterceptor(new StethoInterceptor())
-//                .build();
-        //testData();
+        Stetho.initializeWithDefaults(this);
+        new OkHttpClient.Builder()
+                .addNetworkInterceptor(new StethoInterceptor())
+                .build();
+        testData();
     }
 
     // Comment here
@@ -62,7 +67,7 @@ public class MainActivity extends SharedMenu {
 
         ContentValues values = new ContentValues();
         values.put(SchemaContract.Results.COLUMN_NAME_USER_EMAIL, "user@email.com");
-        values.put(SchemaContract.Results.COLUMN_NAME_QUIZ_DIFFICULTY, "Hard");
+        values.put(SchemaContract.Results.COLUMN_NAME_QUIZ_QUESTIONS, "10");
         values.put(SchemaContract.Results.COLUMN_NAME_QUIZ_RESULTS, "5/10");
 
         // Insert the new row, returning the primary key value of the new row

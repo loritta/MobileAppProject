@@ -25,7 +25,7 @@
             android:textAlignment="center"
             />
         <TextView
-            android:text="@string/lblQuizDifficulty"
+            android:text="@string/lblQuizQuestions"
             android:textAlignment="center"
             />
         <TextView

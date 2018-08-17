@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 
@@ -30,7 +32,9 @@ import java.util.Random;
 public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted {
 
     AsyncRestClientCalls restCall;
-
+    ArrayList<RadioGroup> radioGroupList;
+    String userEmail;
+    int numberOfQuestions;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +44,7 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
         // initialize the intent and the params object
         Intent intent = getIntent();
         // Fetch the user email from the extra
-        String userEmail = intent.getStringExtra("userEmail");
+        userEmail = intent.getStringExtra("userEmail");
 
         RequestParams params = new RequestParams();
 
@@ -50,7 +54,8 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
         if (intent.getStringExtra("categoryID") != null) {
             params.put("category", intent.getStringExtra("categoryID"));
         }
-        if (intent.getStringExtra("difficulty") != null) {
+        if (intent.getStringExtra(
+                "difficulty") != null) {
             params.put("difficulty", intent.getStringExtra("difficulty"));
         }
         if (intent.getStringExtra("type") != null) {
@@ -66,6 +71,9 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
     public void taskCompleted(JSONArray results) {
 
         try {
+
+            // get the number of questions to save to the database records later
+            numberOfQuestions = results.length();
 
             ArrayList<Question> questions = new ArrayList<>();
 
@@ -104,7 +112,7 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
     public void createTable(ArrayList<Question> q){
 
      LinearLayout parentLayout = (LinearLayout) findViewById(R.id.question_list);
-       
+     radioGroupList = new ArrayList<>();
 
         for(Question quest : q) {
 
@@ -117,14 +125,26 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
 
             ArrayList<String> answers = quest.getAnswers();
             int counter=0;
-            for(String ans:answers) {
-                CheckBox answer = new CheckBox(this);
+
+            RadioGroup group = new RadioGroup(this);
+
+            for(String ans : answers) {
+                RadioButton answer = new RadioButton(this);
+                // Test
+                //answer.setId(Integer.decode(ans));
+                //CheckBox answer = new CheckBox(this);
                 answer.setText(ans);
+
+                if (ans.equals(quest.getCorrectAnswer())) {
+
+                    answer.setTag("correct");
+                }
+                group.addView(answer);
                 counter++;
                 answer.setId(10+counter);
-                parentLayout.addView(answer);
             }
-
+            parentLayout.addView(group);
+            radioGroupList.add(group);
         }
     }
 
@@ -147,6 +167,28 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
     }
 
     //create the on click function sendResults
-    public void sendResults(View view){}
+    public void sendResults(View view){
 
+        int correctAnswers = 0;
+        // check if all questions have answers
+        for (RadioGroup g : radioGroupList) {
+            if (g.getCheckedRadioButtonId() == -1) {
+                // warn the user all questions have to be answered
+                return;
+            }
+            else {
+                int buttonId = g.getCheckedRadioButtonId();
+                RadioButton btn = findViewById(buttonId);
+                //Object o = btn.getTag();
+                if (btn.getTag() != null && btn.getTag().equals("correct")) {
+                    correctAnswers++;
+                }
+            }
+        }
+
+        // get the data to be saved to the DB
+        // userEmail (variable declared in onCreate)
+        // correctAnswers (variable declared at start of this method
+        // numberOfQuestions (set when the results are sent back)
+    }
 }
