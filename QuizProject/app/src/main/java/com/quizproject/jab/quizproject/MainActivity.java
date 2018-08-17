@@ -14,7 +14,7 @@ import android.widget.EditText;
 
 //import okhttp3.OkHttpClient;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends SharedMenu {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

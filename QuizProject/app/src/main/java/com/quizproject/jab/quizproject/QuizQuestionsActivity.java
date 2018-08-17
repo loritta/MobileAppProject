@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
-public class QuizQuestionsActivity extends AppCompatActivity implements OnCallCompleted {
+public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted {
 
     AsyncRestClientCalls restCall;
 

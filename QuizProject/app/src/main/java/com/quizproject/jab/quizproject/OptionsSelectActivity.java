@@ -17,7 +17,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class OptionsSelectActivity extends AppCompatActivity implements OnCallCompleted {
+public class OptionsSelectActivity extends SharedMenu implements OnCallCompleted {
 
     Spinner spnQuestions;
     Spinner spnDifficulty;

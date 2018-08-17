@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menuItemNewQuiz"
+        android:title="New Quiz" />
+    <item android:id="@+id/menuItemSignOut"
+        android:title="Sign Out" />
+    <item android:id="@+id/menuItemViewRecentResults"
+        android:title="View Recent Results" />
+</menu>

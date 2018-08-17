@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllResultsActivity extends AppCompatActivity {
+public class AllResultsActivity extends SharedMenu {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
