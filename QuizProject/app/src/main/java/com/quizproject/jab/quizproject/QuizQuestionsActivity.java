@@ -6,20 +6,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import android.view.LayoutInflater;
-import android.widget.Button;
+
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.TableRow;
+
 import android.widget.TextView;
 
 
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.io.Serializable;
+
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class QuizQuestionsActivity extends AppCompatActivity implements OnCallCompleted {
@@ -56,23 +59,51 @@ public class QuizQuestionsActivity extends AppCompatActivity implements OnCallCo
 
     @Override
     public void taskCompleted(JSONArray results) {
+        ArrayList<Question> questions = new ArrayList<>();
+        ArrayList<String> incorrect = new ArrayList<>();
+        incorrect.add("one");
+        incorrect.add("two");
+        Question randomQuestion = new Question("Random","correct", incorrect);
 
+        questions.add(randomQuestion);
+        try {
+            Question question = new Question();
+            for (int i = 0; i < results.length(); i++) {
+
+                JSONObject o = results.getJSONObject(i);
+
+                question.setQuestion(o.getString("question"));
+                question.setCorrectAnswer(o.getString("correct_answer"));
+
+                //getting the incorrect answers
+                JSONArray incorrectAnswers = o.getJSONArray("incorrect_answers");
+
+                ArrayList<String> answers = new ArrayList<>();
+                ArrayList<String> answersShuffled = new ArrayList<>();
+
+                for (int j = 0; j < incorrectAnswers.length(); j++) {
+                    answers.add(j,incorrectAnswers.getString(j));
+                }
+                answers.add(question.getCorrectAnswer());
+                answersShuffled=answersIndexRandomOrder(answers);
+                question.setAnswers(answersShuffled);
+                questions.add(question);
+
+            }
+            createTable(questions);
+
+        }
+        catch (JSONException e) {
+            // handle  the exception
+            return;
+        }
         // Parse the json data here
         Log.d("JSON", results.toString());
 
     }
 
-    public void getListOfQuestions(){
-        ArrayList<Question> q = new ArrayList<>();
-        createTable(q);
-
-    }
-
-
     //creates a dynamic table based on the quantity of questions requested by the user
     public void createTable(ArrayList<Question> q){
-        Serializable quizInfo = getIntent().getSerializableExtra("quizInfo");
-
         LinearLayout parentLayout = (LinearLayout) findViewById(R.id.question_container);
 
         for(int i = 0; i < q.size() ; i++) {
@@ -80,15 +111,36 @@ public class QuizQuestionsActivity extends AppCompatActivity implements OnCallCo
 
             question.setText(q.get(i).getQuestion());
             parentLayout.addView(question);
-            int answersQuantity = q.get(i).getAnswers().length;
-            for(int j = 0; j < answersQuantity; j++) {
+
+            ArrayList<String> answers = q.get(i).getAnswers();
+
+            for(int j = 0; j < answers.size(); j++) {
                 CheckBox answer = new CheckBox(this);
-                answer.setText(q.get(i).getAnswers()[j]);
+                answer.setText(answers.get(j));
                 answer.setId(i+j);
                 parentLayout.addView(answer);
             }
 
         }
     }
+
+    //shuffle the answers order
+    public ArrayList<String> answersIndexRandomOrder(ArrayList<String> a){
+        ArrayList<Integer> numbers = new ArrayList<>();
+        ArrayList<String> shuffledAnswers = new ArrayList<>();
+        Random randomGenerator = new Random();
+        while (numbers.size() < a.size()) {
+
+            int random = randomGenerator .nextInt(a.size());
+            if (!numbers.contains(random)) {
+                numbers.add(random);
+            }
+        }
+        for(int j = 0; j < a.size(); j++) {
+            shuffledAnswers.add(a.get(numbers.get(j)));
+        }
+        return shuffledAnswers;
+    }
+
 
 }

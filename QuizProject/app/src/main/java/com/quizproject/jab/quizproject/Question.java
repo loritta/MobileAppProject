@@ -1,11 +1,16 @@
 package com.quizproject.jab.quizproject;
 
+import java.util.ArrayList;
+
 public class Question {
     String question;
     String correctAnswer;
-    String [] answers;
+    ArrayList<String> answers;
 
-    public Question(String question, String correctAnswer, String[] wanswers) {
+    public Question() {
+    }
+
+    public Question(String question, String correctAnswer, ArrayList<String> answers) {
         this.question = question;
         this.correctAnswer = correctAnswer;
         this.answers = answers;
@@ -27,12 +32,12 @@ public class Question {
         this.correctAnswer = correctAnswer;
     }
 
-    public String[] getAnswers() {
+    public ArrayList<String> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(String[] wrongAnswers) {
-        this.answers = wrongAnswers;
+    public void setAnswers(ArrayList<String> answers) {
+        this.answers = answers;
     }
 
 
