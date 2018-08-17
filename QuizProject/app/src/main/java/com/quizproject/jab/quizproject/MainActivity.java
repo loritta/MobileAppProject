@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void viewResults(View view) {
-        Intent intent = new Intent(this, OptionsSelectActivity.class);
+        Intent intent = new Intent(this, AllResultsActivity.class);
         startActivity(intent);
     }
 

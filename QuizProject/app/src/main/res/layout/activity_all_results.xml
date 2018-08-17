@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AllResultsActivity">
+    tools:context=".AllResultsActivity"
+    android:id="@+id/resultsTable"
 
-</android.support.constraint.ConstraintLayout>
+    android:stretchColumns="*"
+    >
+
+    <TableRow android:layout_width="0dp">
+        <TextView
+            android:layout_span="2"
+            android:text="@string/lblAllResultsHeader"
+            android:textAlignment="center"
+            />
+
+    </TableRow>
+
+    <TableRow android:layout_width="0dp">
+        <TextView
+            android:text="@string/lblUserId"
+            android:textAlignment="center"
+            />
+        <TextView
+            android:text="@string/lblUserEmail"
+            android:textAlignment="center"
+            />
+    </TableRow>
+
+</TableLayout>
