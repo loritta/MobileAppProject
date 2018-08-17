@@ -17,13 +17,15 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    android:layout_margin="10dp"
     tools:context=".QuizQuestionsActivity">
 
     <TextView
     android:id="@+id/introToQuiz"
     android:layout_width="150dp"
     android:layout_height="50dp"
-
+        android:layout_margin="10dp"
+        android:textStyle="bold"
     android:gravity="center_vertical"
     android:text="@string/lblIntroToQuiz"
     android:textAlignment="center"

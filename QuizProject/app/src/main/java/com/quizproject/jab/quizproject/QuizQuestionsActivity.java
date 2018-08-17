@@ -104,6 +104,7 @@ public class QuizQuestionsActivity extends AppCompatActivity implements OnCallCo
     public void createTable(ArrayList<Question> q){
 
      LinearLayout parentLayout = (LinearLayout) findViewById(R.id.question_list);
+       
 
         for(Question quest : q) {
 
