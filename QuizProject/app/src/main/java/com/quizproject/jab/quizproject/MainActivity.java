@@ -9,10 +9,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.facebook.stetho.Stetho;
-import com.facebook.stetho.okhttp3.StethoInterceptor;
+//import com.facebook.stetho.Stetho;
+//import com.facebook.stetho.okhttp3.StethoInterceptor;
 
-import okhttp3.OkHttpClient;
+//import okhttp3.OkHttpClient;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,10 +22,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // testing below
-        Stetho.initializeWithDefaults(this);
-        new OkHttpClient.Builder()
-                .addNetworkInterceptor(new StethoInterceptor())
-                .build();
+//        Stetho.initializeWithDefaults(this);
+//        new OkHttpClient.Builder()
+//                .addNetworkInterceptor(new StethoInterceptor())
+//                .build();
         //testData();
     }
 

@@ -16,8 +16,10 @@
     <string name="btnBegin">Begin</string>
 
     <!-- Quiz Questions activity -->
+    <string name="lblIntroToQuiz">Please select your answer and when done press the Send Button bellow</string>
     <string name="lblQuestionNumber">Question #</string>
     <string name="lblQuestion">Question Placeholder</string>
+    <string name="btnSendResults">See my final score</string>
 
     <!-- View All Results activity -->
     <string name="lblAllResultsHeader"><b>Latest Recorded Results</b></string>
