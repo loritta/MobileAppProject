@@ -39,6 +39,9 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
 
         // initialize the intent and the params object
         Intent intent = getIntent();
+        // Fetch the user email from the extra
+        String userEmail = intent.getStringExtra("userEmail");
+
         RequestParams params = new RequestParams();
 
         // number of questions should never be null
@@ -95,9 +98,6 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
             return;
         }
         // Parse the json data here
-
-
-
     }
 
     //creates a dynamic table based on the quantity of questions requested by the user

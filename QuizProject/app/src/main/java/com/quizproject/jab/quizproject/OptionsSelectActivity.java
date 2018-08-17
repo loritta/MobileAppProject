@@ -81,8 +81,14 @@ public class OptionsSelectActivity extends SharedMenu implements OnCallCompleted
         String difficulty;
         String type;
 
+        Intent currentIntent = getIntent();
+        // Fetch the user email from the extra
+        String userEmail = currentIntent.getStringExtra("userEmail");
+
         // create the intent
         Intent intent = new Intent(this, QuizQuestionsActivity.class);
+        // pass the email
+        intent.putExtra("userEmail", userEmail);
         // there is always a value for number of questions
         questions = spnQuestions.getSelectedItem().toString();
         intent.putExtra("numberOfQuestions", questions);
