@@ -60,12 +60,7 @@ public class QuizQuestionsActivity extends AppCompatActivity implements OnCallCo
     @Override
     public void taskCompleted(JSONArray results) {
         ArrayList<Question> questions = new ArrayList<>();
-        ArrayList<String> incorrect = new ArrayList<>();
-        incorrect.add("one");
-        incorrect.add("two");
-        Question randomQuestion = new Question("Random","correct", incorrect);
 
-        questions.add(randomQuestion);
         try {
             Question question = new Question();
             for (int i = 0; i < results.length(); i++) {
@@ -88,9 +83,9 @@ public class QuizQuestionsActivity extends AppCompatActivity implements OnCallCo
                 answersShuffled=answersIndexRandomOrder(answers);
                 question.setAnswers(answersShuffled);
                 questions.add(question);
-
+                createTable(questions);
             }
-            createTable(questions);
+
 
         }
         catch (JSONException e) {
