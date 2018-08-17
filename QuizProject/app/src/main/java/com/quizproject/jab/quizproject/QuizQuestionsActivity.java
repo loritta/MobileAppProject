@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -99,7 +101,8 @@ public class QuizQuestionsActivity extends AppCompatActivity implements OnCallCo
 
     //creates a dynamic table based on the quantity of questions requested by the user
     public void createTable(ArrayList<Question> q){
-        LinearLayout parentLayout = (LinearLayout) findViewById(R.id.question_container);
+        LinearLayout parentLayout = (LinearLayout) findViewById(R.id.questions_list);
+        LayoutInflater inflater = getLayoutInflater();
 
         for(int i = 0; i < q.size() ; i++) {
             TextView question = new TextView(this);
@@ -137,5 +140,7 @@ public class QuizQuestionsActivity extends AppCompatActivity implements OnCallCo
         return shuffledAnswers;
     }
 
+    //create the on click function sendResults
+    public void sendResults(View view){}
 
 }
