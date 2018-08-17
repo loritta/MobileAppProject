@@ -19,6 +19,11 @@
     <string name="lblQuestionNumber">Question #</string>
     <string name="lblQuestion">Question Placeholder</string>
 
+    <!-- View All Results activity -->
+    <string name="lblAllResultsHeader"><b>Latest Recorded Results</b></string>
+    <string name="lblUserId"><b>ID</b></string>
+    <string name="lblUserEmail"><b>Email</b></string>
+
     <!-- Spinner values for number of questions -->
     <string-array name="numberQuestionsArray">
         <item>5</item>
