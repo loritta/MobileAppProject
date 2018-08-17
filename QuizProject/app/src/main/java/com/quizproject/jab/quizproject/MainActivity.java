@@ -27,11 +27,11 @@ public class MainActivity extends SharedMenu {
         setContentView(R.layout.activity_main);
 
         // testing below
-        Stetho.initializeWithDefaults(this);
-        new OkHttpClient.Builder()
-                .addNetworkInterceptor(new StethoInterceptor())
-                .build();
-        testData();
+//        Stetho.initializeWithDefaults(this);
+//        new OkHttpClient.Builder()
+//                .addNetworkInterceptor(new StethoInterceptor())
+//                .build();
+//        testData();
     }
 
     // Comment here
