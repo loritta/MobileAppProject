@@ -4,7 +4,25 @@ import java.util.ArrayList;
 
 public class Question {
     String question;
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "question='" + question + '\'' +
+                ", correctAnswer='" + correctAnswer + '\'' +
+                ", answers=" + toStringAnswer() +
+                '}';
+    }
+
     String correctAnswer;
+
+
+    public String toStringAnswer() {
+        return "Question{" +
+                "answers=" + answers +
+                '}';
+    }
+
     ArrayList<String> answers;
 
     public Question() {

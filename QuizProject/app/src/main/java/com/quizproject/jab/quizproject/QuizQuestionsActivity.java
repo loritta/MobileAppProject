@@ -61,12 +61,13 @@ public class QuizQuestionsActivity extends AppCompatActivity implements OnCallCo
 
     @Override
     public void taskCompleted(JSONArray results) {
-        ArrayList<Question> questions = new ArrayList<>();
 
         try {
-            Question question = new Question();
-            for (int i = 0; i < results.length(); i++) {
 
+            ArrayList<Question> questions = new ArrayList<>();
+
+            for (int i = 0; i < results.length(); i++) {
+                Question question = new Question();
                 JSONObject o = results.getJSONObject(i);
 
                 question.setQuestion(o.getString("question"));
@@ -76,7 +77,7 @@ public class QuizQuestionsActivity extends AppCompatActivity implements OnCallCo
                 JSONArray incorrectAnswers = o.getJSONArray("incorrect_answers");
 
                 ArrayList<String> answers = new ArrayList<>();
-                ArrayList<String> answersShuffled = new ArrayList<>();
+                ArrayList<String> answersShuffled;
 
                 for (int j = 0; j < incorrectAnswers.length(); j++) {
                     answers.add(j,incorrectAnswers.getString(j));
@@ -85,37 +86,41 @@ public class QuizQuestionsActivity extends AppCompatActivity implements OnCallCo
                 answersShuffled=answersIndexRandomOrder(answers);
                 question.setAnswers(answersShuffled);
                 questions.add(question);
-                createTable(questions);
+
             }
-
-
+            createTable(questions);
         }
         catch (JSONException e) {
             // handle  the exception
             return;
         }
         // Parse the json data here
-        Log.d("JSON", results.toString());
+
+
 
     }
 
     //creates a dynamic table based on the quantity of questions requested by the user
     public void createTable(ArrayList<Question> q){
-        LinearLayout parentLayout = (LinearLayout) findViewById(R.id.question_list);
 
+     LinearLayout parentLayout = (LinearLayout) findViewById(R.id.question_list);
 
-        for(int i = 0; i < q.size() ; i++) {
+        for(Question quest : q) {
+
             TextView question = new TextView(this);
 
-            question.setText(q.get(i).getQuestion());
+            question.setText(quest.getQuestion());
             parentLayout.addView(question);
+//            Log.e("The question:", quest.getQuestion());
 
-            ArrayList<String> answers = q.get(i).getAnswers();
 
-            for(int j = 0; j < answers.size(); j++) {
+            ArrayList<String> answers = quest.getAnswers();
+            int counter=0;
+            for(String ans:answers) {
                 CheckBox answer = new CheckBox(this);
-                answer.setText(answers.get(j));
-                answer.setId(i+j);
+                answer.setText(ans);
+                counter++;
+                answer.setId(10+counter);
                 parentLayout.addView(answer);
             }
 
