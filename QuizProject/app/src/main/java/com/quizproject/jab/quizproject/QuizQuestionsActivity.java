@@ -1,7 +1,9 @@
 package com.quizproject.jab.quizproject;
 
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.loopj.android.http.RequestParams;
@@ -35,6 +38,7 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
     ArrayList<RadioGroup> radioGroupList;
     String userEmail;
     int numberOfQuestions;
+    int correctAnswers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -169,11 +173,12 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
     //create the on click function sendResults
     public void sendResults(View view){
 
-        int correctAnswers = 0;
+        correctAnswers = 0;
         // check if all questions have answers
         for (RadioGroup g : radioGroupList) {
             if (g.getCheckedRadioButtonId() == -1) {
                 // warn the user all questions have to be answered
+                Toast.makeText(this, R.string.tstWarningAllQuestions, Toast.LENGTH_LONG ).show();
                 return;
             }
             else {
@@ -185,10 +190,26 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
                 }
             }
         }
-
+        testData();
         // get the data to be saved to the DB
         // userEmail (variable declared in onCreate)
         // correctAnswers (variable declared at start of this method
         // numberOfQuestions (set when the results are sent back)
+    }
+
+    public void testData() {
+        DbHelper dbHelper = new DbHelper(this);
+        String TAG = "Row of written values";
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(SchemaContract.Results.COLUMN_NAME_USER_EMAIL, userEmail);
+        values.put(SchemaContract.Results.COLUMN_NAME_QUIZ_QUESTIONS, numberOfQuestions);
+        values.put(SchemaContract.Results.COLUMN_NAME_QUIZ_RESULTS, correctAnswers);
+
+        // Insert the new row, returning the primary key value of the new row
+        long newRowId = db.insert(SchemaContract.Results.TABLE_NAME, null, values);
+        Log.i(TAG, Long.toString(newRowId));
     }
 }

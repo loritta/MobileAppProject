@@ -20,6 +20,7 @@
     <string name="lblQuestionNumber">Question #</string>
     <string name="lblQuestion">Question Placeholder</string>
     <string name="btnSendResults">See my final score</string>
+    <string name="tstWarningAllQuestions">All the questions have to be answered</string>
 
     <!-- View All Results activity -->
     <string name="lblAllResultsHeader"><b>Latest Recorded Results</b></string>
