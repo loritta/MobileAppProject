@@ -6,11 +6,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
+
+import java.util.regex.Pattern;
 
 import okhttp3.OkHttpClient;
 
@@ -31,18 +35,25 @@ public class MainActivity extends SharedMenu {
 
     }
 
-    // Comment here
+    // simple function to validate email
+    private boolean isValidEmail(String email) {
+        Pattern pattern = Patterns.EMAIL_ADDRESS;
+        return pattern.matcher(email).matches();
+    }
+
+    // Validate the email and start the next activity
     public void startQuiz(View view) {
 
         EditText edtEmail = findViewById(R.id.edtEmail);
         String email = edtEmail.getText().toString();
 
         if (email.equals("")) {
-            // give a warning here that field cant be empty
-            Log.e("Error", "Email is required");
+            Toast.makeText(this, "Email is Required", Toast.LENGTH_SHORT).show();
         }
-        // optionally validate if its a proper email with regex
-        // here
+        else if (isValidEmail(email) == false) {
+            Toast.makeText(this, "Invalid Email Entered", Toast.LENGTH_SHORT).show();
+        }
+        // email validated
         else {
             // start options select activity
             Intent intent = new Intent(this, OptionsSelectActivity.class);
