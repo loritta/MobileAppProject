@@ -32,6 +32,7 @@ public class FinalResults extends SharedMenu {
     TextView results;
 
     @Override
+    // fetch the passed extras data and display it
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final_results);
@@ -49,13 +50,14 @@ public class FinalResults extends SharedMenu {
         questions.setText(numberOfQuestions);
         results.setText(correctAnswers);
 
-        //sendResultsEmail();
+        // start the async email sending task
         new EmailTask().execute();
 
-
+        // Preferably only send this when the task is completed successfully
         Toast.makeText(FinalResults.this, "We've sent you an email with your results!", Toast.LENGTH_SHORT).show();
 
     }
+    // starts a new quiz for the user
     public void startNewQuiz(View view) {
 
         Intent intent = new Intent(this, OptionsSelectActivity.class);
@@ -69,8 +71,8 @@ public class FinalResults extends SharedMenu {
         // Probably not a great place to store this info
 //        final String username = "jabprojquiz@yahoo.com";
 //        final String password = "mobileappproject";
-        final String userName = "chrdalian56@gmail.com";
-        final String password = "guDD40s155";
+        final String userName = "Jabquizproj2018@gmail.com";
+        final String password = "mobileappproject";
         try {
             GMailSender sender = new GMailSender(userName, password);
             sender.sendMail("Quiz Results",
@@ -90,6 +92,7 @@ public class FinalResults extends SharedMenu {
             sendResultsEmail();
             return null;
         }
+
     }
 }
 
