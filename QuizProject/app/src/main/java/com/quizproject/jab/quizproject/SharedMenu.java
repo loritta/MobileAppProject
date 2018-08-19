@@ -17,15 +17,32 @@ public class SharedMenu extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        Intent passedIntent = getIntent();
+        Intent intent;
+        String userEmail = "";
+        if (passedIntent.getStringExtra("userEmail") != null) {
+            userEmail = passedIntent.getStringExtra("userEmail");
+        }
+
         switch (item.getItemId()) {
             case R.id.menuItemNewQuiz:
-                startActivity(new Intent(this, OptionsSelectActivity.class));
+                intent = new Intent(this, OptionsSelectActivity.class);
+                intent.putExtra("userEmail", userEmail);
+                //startActivity(new Intent(this, OptionsSelectActivity.class));
+                startActivity(intent);
                 return true;
             case R.id.menuItemViewRecentResults:
-                startActivity(new Intent(this, AllResultsActivity.class));
+                intent = new Intent(this, AllResultsActivity.class);
+                intent.putExtra("userEmail", userEmail);
+                //startActivity(new Intent(this, AllResultsActivity.class));
+                startActivity(intent);
+
                 return true;
             case R.id.menuItemSignOut:
-                startActivity(new Intent(this, MainActivity.class));
+                intent = new Intent(this, MainActivity.class);
+                intent.putExtra("userEmail", userEmail);
+                //startActivity(new Intent(this, MainActivity.class));
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
