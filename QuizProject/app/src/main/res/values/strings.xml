@@ -22,6 +22,14 @@
     <string name="btnSendResults">See my final score</string>
     <string name="tstWarningAllQuestions">All the questions have to be answered</string>
 
+    <!-- Final Results activity -->
+    <string name="finalResultsHeader">Final Results</string>
+    <string name="finalResultsEmail">Email</string>
+    <string name="finalResultsQuestions">Number of Questions</string>
+    <string name="finalResultsAnswers">Correct Answers</string>
+    <string name="btnNewQuiz">Start a new Quiz</string>
+
+
     <!-- View All Results activity -->
     <string name="lblAllResultsHeader"><b>Latest Recorded Results</b></string>
     <string name="lblUserEmail"><b>Email</b></string>

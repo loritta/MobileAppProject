@@ -37,8 +37,9 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
     AsyncRestClientCalls restCall;
     ArrayList<RadioGroup> radioGroupList;
     String userEmail;
-    int numberOfQuestions;
+    String numberOfQuestions;
     int correctAnswers;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +78,7 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
         try {
 
             // get the number of questions to save to the database records later
-            numberOfQuestions = results.length();
+            numberOfQuestions = String.valueOf(results.length());
 
             ArrayList<Question> questions = new ArrayList<>();
 
@@ -170,7 +171,7 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
         return shuffledAnswers;
     }
 
-    //create the on click function sendResults
+    // calculate the final results, save the data to the database and call the show results activity
     public void sendResults(View view){
 
         correctAnswers = 0;
@@ -190,14 +191,19 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
                 }
             }
         }
-        testData();
-        // get the data to be saved to the DB
-        // userEmail (variable declared in onCreate)
-        // correctAnswers (variable declared at start of this method
-        // numberOfQuestions (set when the results are sent back)
+        // parse to string for simplicity
+        String correctAnswersString = Integer.toString(correctAnswers);
+        // save the results to the database and call the final activity
+        saveResultsToDb();
+        Intent intent = new Intent(this, FinalResults.class);
+        // pass the 3 variables to the new intent
+        intent.putExtra("userEmail", userEmail);
+        intent.putExtra("questions", numberOfQuestions);
+        intent.putExtra("results", correctAnswersString);
+        startActivity(intent);
     }
 
-    public void testData() {
+    public void saveResultsToDb() {
         DbHelper dbHelper = new DbHelper(this);
         String TAG = "Row of written values";
 

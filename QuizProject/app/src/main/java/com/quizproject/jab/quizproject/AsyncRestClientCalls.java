@@ -26,7 +26,7 @@ public class AsyncRestClientCalls {
 
     // Class constructor, initialize the required objects
     public AsyncRestClientCalls(Context context, OnCallCompleted listener) {
-        asyncHttpClient  = new AsyncHttpClient();
+        asyncHttpClient  = new AsyncHttpClient(true, 80, 443);
         requestParams = new RequestParams();
         this.context = context;
         this.callCompleteListener = listener;

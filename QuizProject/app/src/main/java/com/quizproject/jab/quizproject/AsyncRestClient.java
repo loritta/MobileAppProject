@@ -5,7 +5,7 @@ import com.loopj.android.http.*;
 public class AsyncRestClient {
 
     private static final String BASE_URL = "https://opentdb.com/";
-    private static AsyncHttpClient client = new AsyncHttpClient();
+    private static AsyncHttpClient client = new AsyncHttpClient(true, 80, 443);
 
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         client.get(getAbsoluteUrl(url), params, responseHandler);
