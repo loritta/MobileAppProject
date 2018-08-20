@@ -1,107 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".FinalResults">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 
-    <!-- Labels -->
-    <TextView
-        android:id="@+id/txvFinalResultsHeader"
-        android:text="@string/finalResultsHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/txvFinalResultsUserEmailLabel"
-        android:layout_margin="30dp"
-        />
-    <TextView
-        android:text="@string/finalResultsEmail"
-        android:id="@+id/txvFinalResultsUserEmailLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/txvFinalResultsNumberOfQuestionsLabel"
-        android:layout_margin="30dp"
-        />
-    <TextView
-        android:text="@string/finalResultsQuestions"
-        android:id="@+id/txvFinalResultsNumberOfQuestionsLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/guideline"
-        android:layout_margin="30dp"
-        />
-    <TextView
-        android:text="@string/finalResultsAnswers"
-        android:id="@+id/txvFinalResultsCorrectAnswersLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txvFinalResultsNumberOfQuestionsLabel"
-        android:layout_margin="30dp"
-        />
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
-    <!-- Data -->
-    <TextView
-        android:text="placeholder"
 
-        android:id="@+id/txvFinalResultsUserEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="@id/guidelineVertical"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/txvFinalResultsNumberOfQuestionsLabel"
-        android:layout_margin="30dp"
-        />
-    <TextView
-        android:text="placeholder"
-
-        android:id="@+id/txvFinalResultsNumberOfQuestions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="@id/guidelineVertical"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/guideline"
-        android:layout_margin="30dp"
-        />
-    <TextView
-        android:text="placeholder"
-
-        android:id="@+id/txvFinalResultsCorrectAnswers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="@id/guidelineVertical"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txvFinalResultsNumberOfQuestionsLabel"
-        android:layout_margin="30dp"
-        />
-
-    <!-- new quiz button -->
-    <Button
-        android:id="@+id/btnNewQuiz"
-        android:text="@string/btnNewQuiz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/txvFinalResultsCorrectAnswers"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="50dp"
-        android:onClick="startNewQuiz"
-        />
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
-    <android.support.constraint.Guideline
-        android:id="@+id/guidelineVertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
-</android.support.constraint.ConstraintLayout>
+        tools:context=".FinalResults">
+
+        <TextView
+            android:id="@+id/txvFinalResultsHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:text="@string/finalResultsHeader"
+            android:textStyle="bold"/>
+
+        <!--view with columns-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <!--elements-->
+            <TextView
+                android:id="@+id/txvFinalResultsUserEmailLabel"
+                android:layout_width="0dp"
+                android:layout_weight="0.33"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                android:text="@string/finalResultsEmail" />
+
+            <!--elements-->
+            <TextView
+                android:id="@+id/txvFinalResultsNumberOfQuestionsLabel"
+                android:layout_width="0dp"
+                android:layout_weight="0.33"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                android:text="@string/finalResultsQuestions" />
+
+            <!--elements-->
+
+            <TextView
+                android:id="@+id/txvFinalResultsCorrectAnswersLabel"
+                android:layout_width="0dp"
+                android:layout_weight="0.33"
+                android:layout_height="match_parent"
+
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                android:text="@string/finalResultsAnswers" />
+        </LinearLayout>
+        <!--view with columns-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <!-- Data -->
+            <TextView
+                android:id="@+id/txvFinalResultsUserEmail"
+                android:layout_gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="0.33"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:text="placeholder" />
+
+            <TextView
+                android:id="@+id/txvFinalResultsNumberOfQuestions"
+                android:layout_gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="0.33"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+
+                android:text="placeholder" />
+
+            <TextView
+                android:id="@+id/txvFinalResultsCorrectAnswers"
+                android:layout_gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="0.33"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:text="placeholder" />
+        </LinearLayout>
+        <!-- new quiz button -->
+        <Button
+            android:id="@+id/btnNewQuiz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:onClick="startNewQuiz"
+            android:text="@string/btnNewQuiz"
+            android:layout_gravity="center"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txvFinalResultsCorrectAnswers" />
+
+    </LinearLayout>
+
+
+</ScrollView>

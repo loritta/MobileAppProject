@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
@@ -116,6 +117,8 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
 
             }
             createTable(questions);
+            Button btnSend = findViewById(R.id.btnSendResults);
+            btnSend.setEnabled(true);
         }
         catch (JSONException e) {
             // handle  the exception

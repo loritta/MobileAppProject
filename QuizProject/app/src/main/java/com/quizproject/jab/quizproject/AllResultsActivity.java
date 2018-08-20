@@ -22,6 +22,7 @@ public class AllResultsActivity extends SharedMenu {
         getAllResults();
     }
 
+    //This function gets all the result for the previous quizs fro he database
     public void getAllResults() {
         DbHelper helper = new DbHelper(this);
         SQLiteDatabase db = helper.getReadableDatabase();
@@ -57,6 +58,14 @@ public class AllResultsActivity extends SharedMenu {
         }
         cursor.close();
 
+
+
+
+
+    }
+
+    //create the layout for the displaying of the data
+    public  void createTable(ArrayList<Result> results){
         // create the table layout from the fetched data
         TableLayout table = findViewById(R.id.resultsTable);
 
@@ -101,7 +110,5 @@ public class AllResultsActivity extends SharedMenu {
                             TableLayout.LayoutParams.MATCH_PARENT,
                             TableLayout.LayoutParams.WRAP_CONTENT));
         }
-
-
     }
 }

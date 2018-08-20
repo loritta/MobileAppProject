@@ -1,37 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AllResultsActivity"
-    android:id="@+id/resultsTable"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 
-    android:stretchColumns="*"
-    >
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
-    <TableRow android:layout_width="0dp">
-        <TextView
-            android:layout_span="3"
-            android:text="@string/lblAllResultsHeader"
-            android:textAlignment="center"
-            />
+    <RelativeLayout
+        android:id="@+id/RelativeLayout01"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerHorizontal="true">
 
-    </TableRow>
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/resultsTable"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="*"
 
-    <TableRow android:layout_width="0dp">
-        <TextView
-            android:text="@string/lblUserEmail"
-            android:textAlignment="center"
-            />
-        <TextView
-            android:text="@string/lblQuizQuestions"
-            android:textAlignment="center"
-            />
-        <TextView
-            android:text="@string/lblQuizResults"
-            android:textAlignment="center"
-            />
-    </TableRow>
+            tools:context=".AllResultsActivity">
 
-</TableLayout>
+            <TableRow android:layout_width="0dp">
+
+                <TextView
+                    android:layout_span="3"
+                    android:text="@string/lblAllResultsHeader"
+                    android:textStyle="bold"
+                    android:textAlignment="center" />
+
+            </TableRow>
+
+            <TableRow android:layout_width="0dp">
+
+                <TextView
+                    android:text="@string/lblUserEmail"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:text="@string/lblQuizQuestions"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:text="@string/lblQuizResults"
+                    android:textAlignment="center" />
+            </TableRow>
+
+        </TableLayout>
+    </RelativeLayout>
+</ScrollView>
