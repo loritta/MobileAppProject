@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 
 
@@ -86,8 +88,15 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
                 Question question = new Question();
                 JSONObject o = results.getJSONObject(i);
 
-                question.setQuestion(o.getString("question"));
-                question.setCorrectAnswer(o.getString("correct_answer"));
+                //transforming the json html encoding to a regular string
+                Spanned sQuestion = Html.fromHtml(o.getString("question"));
+                String tempQuestion=sQuestion.toString();
+                Spanned sCorrectAnswers = Html.fromHtml(o.getString("correct_answer"));
+                String tempCorAnswer=sCorrectAnswers.toString();
+
+                //saving to the question object the values needed later
+                question.setQuestion(tempQuestion);
+                question.setCorrectAnswer(tempCorAnswer);
 
                 //getting the incorrect answers
                 JSONArray incorrectAnswers = o.getJSONArray("incorrect_answers");
@@ -96,7 +105,9 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
                 ArrayList<String> answersShuffled;
 
                 for (int j = 0; j < incorrectAnswers.length(); j++) {
-                    answers.add(j,incorrectAnswers.getString(j));
+                    Spanned sIncorrectAnswers = Html.fromHtml(incorrectAnswers.getString(j));
+                    String tempIncorrect=sIncorrectAnswers.toString();
+                    answers.add(j,tempIncorrect);
                 }
                 answers.add(question.getCorrectAnswer());
                 answersShuffled=answersIndexRandomOrder(answers);
