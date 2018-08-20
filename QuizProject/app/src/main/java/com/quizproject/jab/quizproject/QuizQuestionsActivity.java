@@ -32,6 +32,7 @@ import org.json.JSONObject;
 
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 
@@ -42,37 +43,86 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
     String userEmail;
     String numberOfQuestions;
     int correctAnswers;
-
+    ArrayList<Integer> checkedButtonsId;
+    ArrayList<Question> questions;
+    ArrayList<Integer> savedCheckedButtons;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_questions);
 
+        if (savedInstanceState != null) {
 
-        // initialize the intent and the params object
-        Intent intent = getIntent();
-        // Fetch the user email from the extra
-        userEmail = intent.getStringExtra("userEmail");
+            // get the user email
+            userEmail = savedInstanceState.getString("userEmail");
+            // get the list of questions
+            questions = savedInstanceState.getParcelableArrayList("questions");
+            // create the table from the questions
+            createTable(questions);
+            // get the list of ids for checked buttons
+//            ArrayList<Integer> savedCheckedButtons = savedInstanceState.getIntegerArrayList("checkedButtons");
+            savedCheckedButtons = savedInstanceState.getIntegerArrayList("checkedButtons");
 
-        RequestParams params = new RequestParams();
-
-        // number of questions should never be null
-        params.put("amount", intent.getStringExtra("numberOfQuestions"));
-
-        if (intent.getStringExtra("categoryID") != null) {
-            params.put("category", intent.getStringExtra("categoryID"));
+            checkButtons();
         }
-        if (intent.getStringExtra(
-                "difficulty") != null) {
-            params.put("difficulty", intent.getStringExtra("difficulty"));
-        }
-        if (intent.getStringExtra("type") != null) {
-            params.put("type", intent.getStringExtra("type"));
+        // if its a new instance
+        else {
+            // initialize the intent and the params object
+            Intent intent = getIntent();
+            // Fetch the user email from the extra
+            userEmail = intent.getStringExtra("userEmail");
+
+            RequestParams params = new RequestParams();
+
+            // number of questions should never be null
+            params.put("amount", intent.getStringExtra("numberOfQuestions"));
+
+            if (intent.getStringExtra("categoryID") != null) {
+                params.put("category", intent.getStringExtra("categoryID"));
+            }
+            if (intent.getStringExtra(
+                    "difficulty") != null) {
+                params.put("difficulty", intent.getStringExtra("difficulty"));
+            }
+            if (intent.getStringExtra("type") != null) {
+                params.put("type", intent.getStringExtra("type"));
+            }
+
+            restCall = new AsyncRestClientCalls(this, this);
+            restCall.getQuizQuestions(params);
         }
 
-        restCall = new AsyncRestClientCalls(this, this);
-        restCall.getQuizQuestions(params);
+    }
 
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        checkButtons();
+    }
+
+    public void checkButtons() {
+
+        if (savedCheckedButtons == null) return;
+
+        // make sure its not empty (in case no buttons were checked)
+        if (!savedCheckedButtons.isEmpty()) {
+
+            // loop through the radio button groups
+            for (int i = 0; i < radioGroupList.size(); i++) {
+                int checkedId = savedCheckedButtons.get(i);
+                RadioGroup g = radioGroupList.get(i);
+
+
+                if (checkedId != -1) {
+                    g.check(checkedId);
+                    //RadioButton rb = findViewById(checkedId);
+                    //rb.setChecked(true);
+                    //rb.toggle();
+//                        g.check(checkedId);
+                }
+            }
+
+        }
     }
 
     @Override
@@ -83,7 +133,8 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
             // get the number of questions to save to the database records later
             numberOfQuestions = String.valueOf(results.length());
 
-            ArrayList<Question> questions = new ArrayList<>();
+//            ArrayList<Question> questions = new ArrayList<>();
+            questions = new ArrayList<>();
 
             for (int i = 0; i < results.length(); i++) {
                 Question question = new Question();
@@ -231,5 +282,33 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(SchemaContract.Results.TABLE_NAME, null, values);
         Log.i(TAG, Long.toString(newRowId));
+    }
+
+    // to avoid losing user selections and loaded questions on orientation change
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // save the email
+        outState.putString("userEmail", userEmail);
+        outState.putParcelableArrayList("questions", questions);
+
+        // save the api response questions
+//        ArrayList<Question> savedQuestions = new ArrayList<>();
+
+        // list of all the checked button ids
+        checkedButtonsId = new ArrayList<Integer>();
+
+        for (RadioGroup g : radioGroupList) {
+            // if a button is checked add it to the list of ids
+            if (g.getCheckedRadioButtonId() != -1) {
+                checkedButtonsId.add(g.getCheckedRadioButtonId());
+            }
+            else {
+                // testing... trying to have checkedButtonsId be a parallel array
+                checkedButtonsId.add(-1);
+            }
+        }
+
+        outState.putIntegerArrayList("checkedButtons", checkedButtonsId);
     }
 }
