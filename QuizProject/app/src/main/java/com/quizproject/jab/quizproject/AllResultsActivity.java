@@ -58,7 +58,7 @@ public class AllResultsActivity extends SharedMenu {
         }
         cursor.close();
 
-
+        createTable(results);
 
 
 

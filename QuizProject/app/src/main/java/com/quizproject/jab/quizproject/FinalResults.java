@@ -81,6 +81,7 @@ public class FinalResults extends SharedMenu {
                     userEmail);
 
         } catch (Exception e) {
+
             Log.e("SendMail", e.getMessage(), e);
         }
     }
