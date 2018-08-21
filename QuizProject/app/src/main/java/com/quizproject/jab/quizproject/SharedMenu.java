@@ -26,6 +26,9 @@ public class SharedMenu extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.menuItemNewQuiz:
+
+                if (userEmail == "") return false;
+
                 intent = new Intent(this, OptionsSelectActivity.class);
                 intent.putExtra("userEmail", userEmail);
                 //startActivity(new Intent(this, OptionsSelectActivity.class));
