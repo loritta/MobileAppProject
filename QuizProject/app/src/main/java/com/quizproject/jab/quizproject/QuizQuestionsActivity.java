@@ -51,6 +51,7 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_questions);
 
+        // if there is a saved instance
         if (savedInstanceState != null) {
 
             // get the user email
@@ -62,13 +63,12 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
             // create the table from the questions
             createTable(questions);
             // get the list of ids for checked buttons
-//            ArrayList<Integer> savedCheckedButtons = savedInstanceState.getIntegerArrayList("checkedButtons");
             savedCheckedButtons = savedInstanceState.getIntegerArrayList("checkedButtons");
 
             // method below gets called with the onAttachedToWindow() callback
             //checkButtons();
 
-            // enable the send results button
+            // enable the send results button (disabled by default)
             Button b = findViewById(R.id.btnSendResults);
             b.setEnabled(true);
         }
@@ -79,6 +79,7 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
             // Fetch the user email from the extra
             userEmail = intent.getStringExtra("userEmail");
 
+            // Get the user option selections and make api call with the params
             RequestParams params = new RequestParams();
 
             // number of questions should never be null
@@ -101,38 +102,44 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
 
     }
 
+    // Now I dont believe this callback is necessary (more testing is needed)
+    // however there was issues with checkboxes not being checked properly from the onCreate callback
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
         checkButtons();
-
     }
 
+    // Checks the buttons from the saved instance checkedButtonIds list
     public void checkButtons() {
 
+        // if the array isnt initilized yet (new instance)
+        // (just a quick fix)
         if (savedCheckedButtons == null) return;
 
         // make sure its not empty (in case no buttons were checked)
         if (!savedCheckedButtons.isEmpty()) {
+
+            // The savedCheckedButtons array is "parallel" to the radioGroupList array
+            // both arrays have the same length
+            // So for each radio groups, if there is a buttonId at the same index
+            // in the savedCheckButtons array, check the button with that id.
 
             // loop through the radio button groups
             for (int i = 0; i < radioGroupList.size(); i++) {
                 int checkedId = savedCheckedButtons.get(i);
                 RadioGroup g = radioGroupList.get(i);
 
-
+                // if checkedId is -1 then no radio buttons were selected
                 if (checkedId != -1) {
                     g.check(checkedId);
-                    //RadioButton rb = findViewById(checkedId);
-                    //rb.setChecked(true);
-                    //rb.toggle();
-//                        g.check(checkedId);
                 }
             }
 
         }
     }
 
+    // Called after API call success
     @Override
     public void taskCompleted(JSONArray results) {
 
@@ -141,9 +148,9 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
             // get the number of questions to save to the database records later
             numberOfQuestions = String.valueOf(results.length());
 
-//            ArrayList<Question> questions = new ArrayList<>();
             questions = new ArrayList<>();
 
+            // loop through the results
             for (int i = 0; i < results.length(); i++) {
                 Question question = new Question();
                 JSONObject o = results.getJSONObject(i);
@@ -175,46 +182,46 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
                 questions.add(question);
 
             }
+            // Create the table and enable the send results button
             createTable(questions);
             Button btnSend = findViewById(R.id.btnSendResults);
             btnSend.setEnabled(true);
         }
         catch (JSONException e) {
-            // handle  the exception
+            // very informative log
+            Log.e("JSONError", "JSON Error");
             return;
         }
-        // Parse the json data here
     }
 
-    //creates a dynamic table based on the quantity of questions requested by the user
+    //creates a dynamic table based on the number of questions requested by the user
     public void createTable(ArrayList<Question> q){
 
      LinearLayout parentLayout = (LinearLayout) findViewById(R.id.question_list);
      radioGroupList = new ArrayList<>();
 
+        // Question is a custom object holding the parsed JSON questions data
+        // for each questions, create a textview to render them
         for(Question quest : q) {
 
             TextView question = new TextView(this);
 
             question.setText(quest.getQuestion());
             parentLayout.addView(question);
-//            Log.e("The question:", quest.getQuestion());
-
 
             ArrayList<String> answers = quest.getAnswers();
             int counter=0;
 
             RadioGroup group = new RadioGroup(this);
 
+
             for(String ans : answers) {
                 RadioButton answer = new RadioButton(this);
-                // Test
-                //answer.setId(Integer.decode(ans));
-                //CheckBox answer = new CheckBox(this);
+
                 answer.setText(ans);
 
+                // the tag is used later to verify the user's answers
                 if (ans.equals(quest.getCorrectAnswer())) {
-
                     answer.setTag("correct");
                 }
                 group.addView(answer);
@@ -276,6 +283,7 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
         startActivity(intent);
     }
 
+
     public void saveResultsToDb() {
         DbHelper dbHelper = new DbHelper(this);
         String TAG = "Row of written values";
@@ -289,20 +297,19 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(SchemaContract.Results.TABLE_NAME, null, values);
-        Log.i(TAG, Long.toString(newRowId));
+//        Log.i(TAG, Long.toString(newRowId));
     }
 
-    // to avoid losing user selections and loaded questions on orientation change
+    // to avoid losing user selections and fetched questions
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        // save the email
+        // save the email and numberOfQuestions
         outState.putString("userEmail", userEmail);
         outState.putString("numberOfQuestions", numberOfQuestions);
+        // the Question class was made to implement Parcelable, to be able to save it in the bundle.
         outState.putParcelableArrayList("questions", questions);
 
-        // save the api response questions
-//        ArrayList<Question> savedQuestions = new ArrayList<>();
 
         // list of all the checked button ids
         checkedButtonsId = new ArrayList<Integer>();
@@ -313,7 +320,7 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
                 checkedButtonsId.add(g.getCheckedRadioButtonId());
             }
             else {
-                // testing... trying to have checkedButtonsId be a parallel array
+                // if no buttons are checked, add -1 (to keep the arrays the same length)
                 checkedButtonsId.add(-1);
             }
         }
