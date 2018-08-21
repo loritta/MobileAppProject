@@ -55,6 +55,8 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
 
             // get the user email
             userEmail = savedInstanceState.getString("userEmail");
+            // get number of questions
+            numberOfQuestions = savedInstanceState.getString("numberOfQuestions");
             // get the list of questions
             questions = savedInstanceState.getParcelableArrayList("questions");
             // create the table from the questions
@@ -296,6 +298,7 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
 
         // save the email
         outState.putString("userEmail", userEmail);
+        outState.putString("numberOfQuestions", numberOfQuestions);
         outState.putParcelableArrayList("questions", questions);
 
         // save the api response questions
