@@ -63,7 +63,7 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
 //            ArrayList<Integer> savedCheckedButtons = savedInstanceState.getIntegerArrayList("checkedButtons");
             savedCheckedButtons = savedInstanceState.getIntegerArrayList("checkedButtons");
 
-            checkButtons();
+            //checkButtons();
         }
         // if its a new instance
         else {
