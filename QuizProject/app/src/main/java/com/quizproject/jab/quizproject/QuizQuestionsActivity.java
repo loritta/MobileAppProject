@@ -63,7 +63,12 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
 //            ArrayList<Integer> savedCheckedButtons = savedInstanceState.getIntegerArrayList("checkedButtons");
             savedCheckedButtons = savedInstanceState.getIntegerArrayList("checkedButtons");
 
+            // method below gets called with the onAttachedToWindow() callback
             //checkButtons();
+
+            // enable the send results button
+            Button b = findViewById(R.id.btnSendResults);
+            b.setEnabled(true);
         }
         // if its a new instance
         else {
@@ -98,6 +103,7 @@ public class QuizQuestionsActivity extends SharedMenu implements OnCallCompleted
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
         checkButtons();
+
     }
 
     public void checkButtons() {
