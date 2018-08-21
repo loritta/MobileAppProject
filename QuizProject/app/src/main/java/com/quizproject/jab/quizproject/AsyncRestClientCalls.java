@@ -68,7 +68,6 @@ public class AsyncRestClientCalls {
         });
     }
 
-//    public void getQuizQuestions(String numberQuestions, String category, String difficulty, String type) {
     public void getQuizQuestions(RequestParams params) {
 
         // Categories need the category ID

@@ -69,8 +69,7 @@ public class FinalResults extends SharedMenu {
     public void sendResultsEmail() {
 
         // Probably not a great place to store this info
-//        final String username = "jabprojquiz@yahoo.com";
-//        final String password = "mobileappproject";
+        // Definitely not a good place.
         final String userName = "Jabquizproj2018@gmail.com";
         final String password = "mobileappproject";
         try {
@@ -81,8 +80,7 @@ public class FinalResults extends SharedMenu {
                     userEmail);
 
         } catch (Exception e) {
-
-            Log.e("SendMail", e.getMessage(), e);
+            Log.e("SendMailError", e.getMessage(), e);
         }
     }
 

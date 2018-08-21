@@ -27,6 +27,7 @@ public class SharedMenu extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menuItemNewQuiz:
 
+                // This is to avoid a user jumping to a new quiz without "logging in" through the menu
                 if (userEmail == "") return false;
 
                 intent = new Intent(this, OptionsSelectActivity.class);
@@ -35,16 +36,16 @@ public class SharedMenu extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.menuItemViewRecentResults:
+
                 intent = new Intent(this, AllResultsActivity.class);
                 intent.putExtra("userEmail", userEmail);
-                //startActivity(new Intent(this, AllResultsActivity.class));
                 startActivity(intent);
 
                 return true;
             case R.id.menuItemSignOut:
+
                 intent = new Intent(this, MainActivity.class);
                 intent.putExtra("userEmail", userEmail);
-                //startActivity(new Intent(this, MainActivity.class));
                 startActivity(intent);
                 return true;
             default:

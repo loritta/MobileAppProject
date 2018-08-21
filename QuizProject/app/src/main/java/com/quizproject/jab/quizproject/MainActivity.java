@@ -35,7 +35,7 @@ public class MainActivity extends SharedMenu {
 
     }
 
-    // simple function to validate email
+    // simple function to validate email using the built-in Patterns.EMAIL_ADDRESS
     private boolean isValidEmail(String email) {
         Pattern pattern = Patterns.EMAIL_ADDRESS;
         return pattern.matcher(email).matches();
@@ -50,14 +50,14 @@ public class MainActivity extends SharedMenu {
         if (email.equals("")) {
             Toast.makeText(this, "Email is Required", Toast.LENGTH_SHORT).show();
         }
-        else if (isValidEmail(email) == false) {
+        // see the method above
+        else if (!isValidEmail(email)) {
             Toast.makeText(this, "Invalid Email Entered", Toast.LENGTH_SHORT).show();
         }
-        // email validated
         else {
             // start options select activity
             Intent intent = new Intent(this, OptionsSelectActivity.class);
-            // pass the email as it might be needed
+            // pass the email as it will be used later in the application
             intent.putExtra("userEmail", email);
             startActivity(intent);
         }
@@ -68,17 +68,18 @@ public class MainActivity extends SharedMenu {
         startActivity(intent);
     }
 
-    public void testData() {
-        DbHelper dbHelper = new DbHelper(this);
-
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(SchemaContract.Results.COLUMN_NAME_USER_EMAIL, "user@email.com");
-        values.put(SchemaContract.Results.COLUMN_NAME_QUIZ_QUESTIONS, "10");
-        values.put(SchemaContract.Results.COLUMN_NAME_QUIZ_RESULTS, "5/10");
-
-        // Insert the new row, returning the primary key value of the new row
-        long newRowId = db.insert(SchemaContract.Results.TABLE_NAME, null, values);
-    }
+    // Database testing function
+//    public void testData() {
+//        DbHelper dbHelper = new DbHelper(this);
+//
+//        SQLiteDatabase db = dbHelper.getWritableDatabase();
+//
+//        ContentValues values = new ContentValues();
+//        values.put(SchemaContract.Results.COLUMN_NAME_USER_EMAIL, "user@email.com");
+//        values.put(SchemaContract.Results.COLUMN_NAME_QUIZ_QUESTIONS, "10");
+//        values.put(SchemaContract.Results.COLUMN_NAME_QUIZ_RESULTS, "5/10");
+//
+//        // Insert the new row, returning the primary key value of the new row
+//        long newRowId = db.insert(SchemaContract.Results.TABLE_NAME, null, values);
+//    }
 }

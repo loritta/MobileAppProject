@@ -18,12 +18,14 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+// Class name describes it's function
 public class GMailSender extends javax.mail.Authenticator {
     private String mailhost = "smtp.gmail.com";
     private String user;
     private String password;
     private Session session;
 
+    // static block executed once during initialization
     static {
         Security.addProvider(new JSSEProvider());
     }

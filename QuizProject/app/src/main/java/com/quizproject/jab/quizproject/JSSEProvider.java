@@ -3,6 +3,8 @@ package com.quizproject.jab.quizproject;
 import java.security.AccessController;
 import java.security.Provider;
 
+// Component of the email sending function
+// I did not write this code.
 public final class JSSEProvider extends Provider {
 
     public JSSEProvider() {

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Question implements Parcelable {
     String question;
 
+
     protected Question(Parcel in) {
         question = in.readString();
         correctAnswer = in.readString();

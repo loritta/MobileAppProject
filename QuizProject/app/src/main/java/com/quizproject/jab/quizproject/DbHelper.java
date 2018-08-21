@@ -11,12 +11,6 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 8;
     public static final String DATABASE_NAME = "QuizDb";
 
-    // saving the initial create query in a variable
-//    private static final String SQL_CREATE_ENTRIES =
-//            "CREATE TABLE " + SchemaContract.Users.TABLE_NAME + " (" +
-//                    SchemaContract.Users._ID + " INTEGER PRIMARY KEY," +
-//                    SchemaContract.Users.COLUMN_NAME_EMAIL + " TEXT)";
-
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + SchemaContract.Results.TABLE_NAME + " (" +
                     SchemaContract.Results._ID + " INTEGER PRIMARY KEY," +
@@ -34,13 +28,12 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
     public void onCreate(SQLiteDatabase db) {
-        //sqLiteDatabase.execSQL("create table user (name text, address text, phone text)");
         db.rawQuery("DROP TABLE IF EXISTS results", null, null);
         db.execSQL(SQL_CREATE_ENTRIES);
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // This database is only a cache for online data, so its upgrade policy is
-        // to simply discard the data and start over
+
+        // the data is really not sensitive
         db.execSQL(SQL_DELETE_ENTRIES);
 
         onCreate(db);

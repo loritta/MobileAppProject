@@ -22,13 +22,12 @@ public class AllResultsActivity extends SharedMenu {
         getAllResults();
     }
 
-    //This function gets all the result for the previous quizs fro he database
+    //This function gets all the results from the previous quizzes from the database
     public void getAllResults() {
         DbHelper helper = new DbHelper(this);
         SQLiteDatabase db = helper.getReadableDatabase();
 
         // define the columns to fetch
-        // ID and email for now, eventually replace with actual results
         String[] projection = {
                 SchemaContract.Results.COLUMN_NAME_USER_EMAIL,
                 SchemaContract.Results.COLUMN_NAME_QUIZ_QUESTIONS,
@@ -64,7 +63,7 @@ public class AllResultsActivity extends SharedMenu {
 
     }
 
-    //create the layout for the displaying of the data
+    //create the layout to display the data
     public  void createTable(ArrayList<Result> results){
         // create the table layout from the fetched data
         TableLayout table = findViewById(R.id.resultsTable);
